@@ -15,11 +15,13 @@
         if(!isset($_GET['code']))
         {            
             //$url = 'https://accounts.spotify.com/authorize?client_id=e43f2a20ac2b431dac748321406b0151&response_type=code&redirect_uri=http%3A%2F%2F192.168.64.2%2Fspotify-playlists';
-            $url = "https://accounts.spotify.com/authorize?client_id=e43f2a20ac2b431dac748321406b0151&response_type=code&redirect_uri=http%3A%2F%2F192.168.64.2%2Fspotify-playlists&show_dialog=false&scope=user-read-private user-read-email&scope=3igQ0BTFXpaWmzvG";
+            $url = "https://accounts.spotify.com/authorize?client_id=e43f2a20ac2b431dac748321406b0151&response_type=code&redirect_uri=http%3A%2F%2F192.168.64.2%2Fspotify-playlists&show_dialog=false&scope=user-read-private user-read-email&scope=" . generateRandomString(16);
             header('Location: ' . $url);
         }
         else
-        {        
+        {      
+            print($_GET['code']);
+            /*
             $clients = "e43f2a20ac2b431dac748321406b0151:f331678cd91e40598c4072f740dacbb5";
             $headers = [
                 "Authorization:Basic " . base64_encode($clients),
@@ -50,7 +52,16 @@
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
 
             $result = curl_exec($ch);
-            echo $result;
+            $result = json_decode($result, true);
+
+            print_r($result);
+            //if($res)
+            //$newtoken = $result['access_token'];
+            //print($newtoken);
+            //print("new token is " . $newtoken);
+            */
+
+
         }
     ?>
 </body>

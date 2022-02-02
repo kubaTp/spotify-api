@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +23,9 @@
             header('Location: ' . $url);
         }
         else
-        {      
-            print($_GET['code']);
-            /*
+        {
+            // generate token
+
             $clients = "e43f2a20ac2b431dac748321406b0151:f331678cd91e40598c4072f740dacbb5";
             $headers = [
                 "Authorization:Basic " . base64_encode($clients),
@@ -55,13 +59,12 @@
             $result = json_decode($result, true);
 
             print_r($result);
-            //if($res)
-            //$newtoken = $result['access_token'];
-            //print($newtoken);
-            //print("new token is " . $newtoken);
-            */
 
-
+            if(!isset($result['error']))
+            {
+                $_SESSION['access_token'] = $result['access_token'];
+                header("Location: playlists.php");
+            }
         }
     ?>
 </body>
